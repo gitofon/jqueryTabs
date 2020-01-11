@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+    <header>
+
+    <ul>
+        <li class="tab-switcher" data-tab-index="0" tabindex="0">
+            Prvi
+        </li>
+        <li class="tab-switcher" data-tab-index="1" tabindex="0">
+            Drugi
+        </li>
+        <li class="tab-switcher" data-tab-index="2" tabindex="0">
+            Treci
+        </li>
+        <li class="tab-switcher" data-tab-index="3" tabindex="0">
+            Cetvrti
+        </li>
+    </ul>
+    <div id="allTabsContainer">
+        <div class="tab-container" data-tab-index="0">
+            <h1>Neki text H1</h1>
+        </div>
+        <div class="tab-container" data-tab-index="1" style="display:none;">
+            <h2>Neki text H2</h2>
+        </div>
+        <div class="tab-container" data-tab-index="2" style="display:none;">
+            <h3>Neki text H3</h3> 
+        </div>
+        <div class="tab-container" data-tab-index="3" style="display:none;">
+            <h4>Neki text H4</h4>
+        </div>
+    </div>
+    <style>
+        body{
+            background-color: #979b98;
+        }
+        ul {
+            padding: 0;
+           list-style: none;
+           background:#4efc6b;
+        
+        }
+        ul li{
+            display: inline-block;
+           position: relative;
+           line-height: 21px;
+           text-align: left;
+        }
+        ul li:hover{
+            color:white
+        }
+        
+        .tab-switcher {
+          display: inline-block;
+          cursor: pointer;
+          margin-right: 25px;
+        }
+        #allTabsContainer{
+            border-style: solid;
+            border-color: #4efc6b;
+        }
+        </style>
+<script>
+$(document).ready(function () {
+    var previousActiveTabIndex = 0;
+
+    $(".tab-switcher").on('click keypress', function (event) {
+
+        // event.which === 13 znaci da je enter pritisnut
+        if ((event.type === "keypress" && event.which === 13) || event.type === "click") {
+
+            var tabClicked = $(this).data("tab-index");
+
+            if(tabClicked != previousActiveTabIndex) {
+                $("#allTabsContainer .tab-container").each(function () {
+                    if($(this).data("tab-index") == tabClicked) {
+                        $(".tab-container").hide();
+                        $(this).show();
+                        previousActiveTabIndex = $(this).data("tab-index");
+                        return;
+                    }
+                });
+            }
+        }
+    });
+});
+</script>
+   </header>
+</body>
+</html> 
